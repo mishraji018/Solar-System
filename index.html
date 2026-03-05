@@ -2,13 +2,25 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Cosmos Explorer | Solar System</title>
 
 <link rel="stylesheet" href="style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- FIX FOR GITHUB PAGES: Import Map for Three.js -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 
 </head>
 
@@ -16,7 +28,9 @@
 
 <!-- Loading Screen -->
 <div id="loading-screen">
+
   <div class="loader-container">
+
     <div class="loader"></div>
 
     <div class="loader-text">
@@ -27,14 +41,19 @@
     <div class="progress-bar">
       <div id="progress-inner"></div>
     </div>
+
   </div>
+
 </div>
+
 
 <!-- THREE JS CANVAS -->
 <div id="canvas-container"></div>
 
+
 <!-- UI -->
 <div id="ui-container">
+
 
 <header class="nasa-header glass-panel">
 
@@ -110,6 +129,7 @@ id="speed-slider"
 />
 
 </div>
+
 
 <div class="button-grid">
 
