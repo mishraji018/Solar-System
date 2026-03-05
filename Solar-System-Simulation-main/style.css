@@ -1,0 +1,321 @@
+:root {
+    --glass-bg: rgba(10, 15, 25, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-blue: #00d2ff;
+    --accent-glow: rgba(0, 210, 255, 0.5);
+    --text-primary: #e0e6ed;
+    --text-dim: #94a3b8;
+    --font-main: 'Inter', sans-serif;
+    --font-heading: 'Orbitron', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #000;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+}
+
+/* --- CANVAS --- */
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* --- UI OVERLAY --- */
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    pointer-events: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* --- TOP BAR --- */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--accent-blue);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.version {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+}
+
+.mission-status {
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #4ade80;
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+/* --- GRID LAYOUT --- */
+.ui-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr 320px;
+    grid-template-rows: 1fr auto;
+    gap: 20px;
+    flex-grow: 1;
+    pointer-events: none;
+}
+
+#info-panel {
+    grid-column: 1;
+    padding: 25px;
+    height: fit-content;
+    align-self: start;
+    pointer-events: auto;
+}
+
+#controls-panel {
+    grid-column: 3;
+    padding: 25px;
+    height: fit-content;
+    align-self: start;
+    pointer-events: auto;
+}
+
+/* --- PANELS CONTENT --- */
+.panel-header {
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 10px;
+}
+
+h2, h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--accent-blue);
+    margin-bottom: 5px;
+}
+
+.tag {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border: 1px solid var(--accent-blue);
+    border-radius: 4px;
+}
+
+#planet-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.value {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+}
+
+/* --- CONTROLS --- */
+.control-row {
+    margin: 15px 0;
+}
+
+label {
+    display: block;
+    font-size: 0.7rem;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+input[type="range"] {
+    width: 100%;
+    appearance: none;
+    background: var(--glass-border);
+    height: 4px;
+    border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.glass-btn:hover {
+    background: var(--accent-blue);
+    color: #000;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.selector-container {
+    margin-top: 20px;
+}
+
+.grid-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.planet-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    padding: 8px 4px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.planet-btn:hover, .planet-btn.active {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    background: rgba(0, 210, 255, 0.1);
+}
+
+/* --- LOADING SCREEN --- */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--glass-border);
+    border-top-color: var(--accent-blue);
+    border-radius: 50%;
+    animation: spinCircle 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spinCircle {
+    to { transform: rotate(360deg); }
+}
+
+#loading-status {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-top: 10px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1000px) {
+    .ui-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        overflow-y: auto;
+        pointer-events: auto;
+        padding-bottom: 100px;
+    }
+    
+    #info-panel, #controls-panel {
+        grid-column: 1;
+        width: 100%;
+    }
+}
