@@ -31,7 +31,7 @@ let focusedPlanet = null;
 
 // --- INITIALIZATION ---
 function init() {
-  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);
   textureLoader = new THREE.TextureLoader();
 
   // Camera
@@ -41,7 +41,7 @@ function init() {
   // Renderer
   renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
   renderer.shadowMap.enabled = true;
   renderer.toneMapping = THREE.ReinhardToneMapping;
   document.getElementById('canvas-container').appendChild(renderer.domElement);
@@ -100,7 +100,7 @@ function createSun() {
   sun = new THREE.Mesh(sunGeom, sunMat);
   scene.add(sun);
 
-  const sunLight = new THREE.PointLight(0xffffff, 60000, 2000);
+  const sunLight = new THREE.PointLight(0xffffff, 25000, 3000);
   sun.add(sunLight);
 }
 
@@ -194,9 +194,9 @@ function createPlanets() {
     if (data.hasRings) {
       const ringGeom = new THREE.RingGeometry(data.radius * 1.5, data.radius * 2.6, 128);
       const ringTex = textureLoader.load(TEXTURE_BASE + 'saturn_ring_alpha.png');
-      const ringMat = new THREE.MeshBasicMaterial({ map: ringTex, side: THREE.DoubleSide, transparent: true, opacity: 0.8 });
+      const ringMat = new THREE.MeshBasicMaterial({ map: ringTex, side: THREE.DoubleSide, transparent: true, opacity: 0.8 ,roughness=0.8});
       const ring = new THREE.Mesh(ringGeom, ringMat);
-      ring.rotation.x = Math.PI / 2;
+      ring.rotation.x = -Math.PI / 2;
       mesh.add(ring);
     }
 
