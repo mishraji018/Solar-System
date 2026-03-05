@@ -1,97 +1,153 @@
 <!DOCTYPE html>
-<title>Solar System</title>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmos Explorer | Solar System</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 </head>
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    overflow: hidden;
-  }
-
-  .container {
-    font-size: 10px;
-    width: 40em;
-    height: 40em;
-    position: relative;
-  }
-
-  .sun {
-    position: absolute;
-    top: 15em;
-    left: 15em;
-    width: 10em;
-    height: 10em;
-    background-color: yellow;
-    border-radius: 50%;
-    box-shadow: 0 0 3em white;
-  }
-
-  .earth,
-  .moon {
-    position: absolute;
-    border-radius: solid;
-    border-color: white transparent transparent;
-    border-width: 0.1em 0.1em 0 0;
-    border-radius: 50%;
-  }
-
-  .earth {
-    top: 5em;
-    left: 5em;
-    width: 30em;
-    height: 30em;
-    animation: orbit 36.5s linear infinite;
-  }
-
-  .moon {
-    top: 0;
-    right: 0;
-    width: 8em;
-    height: 8em;
-    animation: orbit 2.7s linear infinite;
-  }
-
-  .earth::before,
-  .moon::before {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-  }
-
-  .earth::before {
-    top: 2.8em;
-    right: 2.8em;
-    width: 3em;
-    height: 3em;
-    background-color: rgb(51, 232, 232);
-  }
-
-  .moon::before {
-    top: 0.8mm;
-    right: 0.2em;
-    width: 1.2em;
-    height: 1.2em;
-    background-color: silver;
-  }
-
-  @keyframes orbit {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
 
 <body>
-  <div class="container">
-    <div class="sun"></div>
-    <div class="earth">
-      <div class="moon"></div>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="loader-container">
+    <div class="loader"></div>
+
+    <div class="loader-text">
+      <h2>COSMOS</h2>
+      <p id="loading-status">INITIALIZING SYSTEM...</p>
+    </div>
+
+    <div class="progress-bar">
+      <div id="progress-inner"></div>
     </div>
   </div>
+</div>
+
+<!-- THREE JS CANVAS -->
+<div id="canvas-container"></div>
+
+<!-- UI -->
+<div id="ui-container">
+
+<header class="nasa-header glass-panel">
+
+<div class="logo">
+COSMOS EXPLORER
+</div>
+
+<div class="mission-status">
+<div class="pulse"></div>
+MISSION ACTIVE
+</div>
+
+</header>
+
+
+<!-- Planet Info Panel -->
+<div class="info-panel glass-panel">
+
+<div class="panel-header">
+
+<h1 id="planet-name">
+SUN
+</h1>
+
+<span class="coord-tag">
+TARGET
+</span>
+
+</div>
+
+<p id="planet-description">
+The star at the center of our Solar System.
+</p>
+
+<div class="stats">
+
+<div class="stat-item">
+<span class="label">Orbit Distance</span>
+<span class="value" id="orbit-dist">0 AU</span>
+</div>
+
+<div class="stat-item">
+<span class="label">Diameter</span>
+<span class="value" id="diameter">1.39M km</span>
+</div>
+
+<div class="stat-item">
+<span class="label">Velocity</span>
+<span class="value" id="velocity">0 km/s</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Controls Panel -->
+<div class="controls-panel glass-panel">
+
+<h3>SIMULATION CONTROLS</h3>
+
+<div class="control-group">
+
+<label>TIME SCALE</label>
+
+<input
+type="range"
+min="0"
+max="10"
+step="0.1"
+value="1"
+id="speed-slider"
+/>
+
+</div>
+
+<div class="button-grid">
+
+<button class="nasa-btn" id="play-pause-btn">
+PAUSE
+</button>
+
+<button class="nasa-btn" id="reset-cam-btn">
+RESET CAMERA
+</button>
+
+<button class="nasa-btn" id="toggle-orbits-btn">
+TOGGLE ORBITS
+</button>
+
+</div>
+
+
+<div class="planet-selector">
+
+<h3>TARGET SYSTEM</h3>
+
+<div class="selector-grid" id="planet-list">
+
+<!-- Buttons added dynamically by JS -->
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- THREE JS SCRIPT -->
+<script type="module" src="script.js"></script>
+
 </body>
 
 </html>
