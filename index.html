@@ -1,92 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cosmos Explorer | Solar System Simulation</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap"
-    rel="stylesheet">
-  <!-- Three.js Import Map -->
-  <script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solar System Explorer</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- GSAP is used for all strictly timed cinematic transitions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- Three.js import map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.162.0/examples/jsm/"
+            }
+        }
+    </script>
 </head>
-
 <body>
-  <!-- Loading Screen -->
-  <div id="loading-screen">
-    <div class="loader-content">
-      <div class="spinner"></div>
-      <h1>COSMOS</h1>
-      <p id="loading-status">INITIALIZING PROBE...</p>
-    </div>
-  </div>
-
-  <!-- Main Canvas -->
-  <div id="canvas-container"></div>
-
-  <!-- HUD / UI Interface -->
-  <div id="ui-overlay">
-    <header class="glass-panel top-bar">
-      <div class="brand">
-        <span class="logo">COSMOS</span>
-        <span class="version">v2.0</span>
-      </div>
-      <div class="mission-status">
-        <span class="status-dot"></span>
-        SYSTEMS ONLINE
-      </div>
-    </header>
-
-    <main class="ui-grid">
-      <!-- Planet Information -->
-      <section id="info-panel" class="glass-panel">
-        <div class="panel-header">
-          <h2 id="planet-name">THE SUN</h2>
-          <span class="tag">TARGET</span>
+    <!-- Full-screen splash screen with glassmorphism -->
+    <section id="splash-screen" aria-label="Simulation launch screen">
+        <div class="splash-card">
+            <p class="splash-kicker">INTERSTELLAR NAVIGATION CONSOLE</p>
+            <h1>SOLAR SYSTEM EXPLORER</h1>
+            <p class="splash-copy">
+                Begin in deep space, then fly inward with a timed cinematic camera sequence.
+            </p>
+            <button id="start-btn" type="button">START SIMULATION</button>
         </div>
-        <p id="planet-description">The star at the heart of our Solar System.</p>
-        <div class="stats-grid">
-          <div class="stat">
-            <span class="label">DISTANCE</span>
-            <span class="value" id="stat-dist">0 AU</span>
-          </div>
-          <div class="stat">
-            <span class="label">DIAMETER</span>
-            <span class="value" id="stat-diam">1.39M km</span>
-          </div>
-        </div>
-      </section>
+    </section>
 
-      <!-- Simulation Controls -->
-      <section id="controls-panel" class="glass-panel">
-        <h3>SIMULATION</h3>
-        <div class="control-row">
-          <label>WARP SPEED</label>
-          <input type="range" id="speed-slider" min="0" max="5" step="0.1" value="1">
-        </div>
-        <div class="btn-group">
-          <button id="play-pause-btn" class="glass-btn">PAUSE</button>
-          <button id="reset-cam-btn" class="glass-btn">RESET</button>
-        </div>
-        <div class="selector-container">
-          <label>SYSTEM TARGETS</label>
-          <div id="planet-selector" class="grid-selector">
-            <!-- Filled by JS -->
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
+    <!-- Cyberpunk fact panel: shown only after the 2-second zoom-in completes -->
+    <aside id="fact-panel" aria-hidden="true">
+        <div class="panel-glow"></div>
 
-  <script type="module" src="script.js"></script>
+        <header class="panel-header">
+            <div>
+                <p id="fact-subtitle">CELESTIAL BODY</p>
+                <h2 id="fact-name">SUN</h2>
+            </div>
+            <button id="close-panel-btn" type="button">Close</button>
+        </header>
+
+        <section class="stats-grid" aria-label="Planetary statistics">
+            <div class="stat-row"><span>Mass</span><strong id="stat-mass"></strong></div>
+            <div class="stat-row"><span>Mean Distance from Sun</span><strong id="stat-distance"></strong></div>
+            <div class="stat-row"><span>Rotation Period</span><strong id="stat-rotation"></strong></div>
+            <div class="stat-row"><span>Solar Orbit Period</span><strong id="stat-orbit"></strong></div>
+            <div class="stat-row"><span>Surface Gravity</span><strong id="stat-gravity"></strong></div>
+            <div class="stat-row"><span>Surface Temperature</span><strong id="stat-surface-temp"></strong></div>
+            <div class="stat-row"><span>Summer Temperature</span><strong id="stat-summer-temp"></strong></div>
+            <div class="stat-row"><span>Winter Temperature</span><strong id="stat-winter-temp"></strong></div>
+            <div class="stat-row"><span>Density</span><strong id="stat-density"></strong></div>
+        </section>
+
+        <section id="fact-text" aria-label="Detailed facts"></section>
+    </aside>
+
+    <p id="interaction-hint">Click the Sun or any planet to inspect data.</p>
+
+    <script type="module" src="main.js"></script>
 </body>
-
 </html>
