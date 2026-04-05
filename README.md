@@ -45,7 +45,7 @@ Each planet revolves around the Sun with **different orbit speeds and distances*
 
 You can view the live project here:
 
-https://mishraji018.github.io/Solar_System_Simulation/
+https://solar-system-sepia-ten.vercel.app/
 
 ---
 
@@ -60,21 +60,6 @@ Solar_System_Simulation
 └── README.md
 ```
 
----
-
-## ▶ How to Run
-
-1. Clone the repository
-
-```
-git clone https://github.com/mishraji018/Solar_System_Simulation.git
-```
-
-2. Open the folder
-
-3. Run using **Live Server** or open `index.html` in a browser.
-
----
 
 ## 📌 Future Improvements
 
